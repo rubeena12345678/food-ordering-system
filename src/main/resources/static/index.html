@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Foodie - Delicious Food Delivered</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <style>
+
+        :root {
+            --orange: #FF6B35;
+            --orange-dark: #E85D04;
+            --gold: #FFB703;
+            --dark: #1F2937;
+            --cream: #FFF8F0;
+            --green: #2A9D8F;
+            --text: #292929;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: var(--cream);
+            color: var(--text);
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================== */
+
+        .navbar {
+            background: var(--dark);
+            padding: 15px 0;
+        }
+
+        .brand {
+            color: white;
+            font-size: 29px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .brand span {
+            color: var(--gold);
+        }
+
+        .nav-link-custom {
+            color: white !important;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 600;
+        }
+
+        .nav-link-custom:hover {
+            color: var(--gold) !important;
+        }
+
+        .login-btn {
+            border: 1px solid white;
+            color: white;
+            border-radius: 25px;
+            padding: 8px 20px;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .login-btn:hover {
+            background: white;
+            color: var(--dark);
+        }
+
+        .register-btn {
+            background: var(--orange);
+            color: white;
+            border-radius: 25px;
+            padding: 9px 20px;
+            text-decoration: none;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
+        .register-btn:hover {
+            background: var(--orange-dark);
+            color: white;
+        }
+
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            min-height: 600px;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    #FF6B35,
+                    #F97316,
+                    #FFB703
+                );
+
+            position: relative;
+            overflow: hidden;
+
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: "🍕";
+            position: absolute;
+            font-size: 180px;
+            left: -30px;
+            top: 40px;
+            opacity: 0.12;
+            transform: rotate(-20deg);
+        }
+
+        .hero::after {
+            content: "🍔";
+            position: absolute;
+            font-size: 200px;
+            right: -30px;
+            bottom: -40px;
+            opacity: 0.12;
+            transform: rotate(15deg);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 9px 18px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 58px;
+            line-height: 1.1;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #FFF3C4;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons a {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .order-btn {
+            background: white;
+            color: var(--orange-dark);
+        }
+
+        .order-btn:hover {
+            background: #fff3e8;
+            color: var(--orange-dark);
+        }
+
+        .explore-btn {
+            border: 2px solid white;
+            color: white;
+        }
+
+        .explore-btn:hover {
+            background: white;
+            color: var(--orange-dark);
+        }
+
+
+        /* =========================
+           FOOD IMAGE
+        ========================== */
+
+        .food-circle {
+            width: 390px;
+            height: 390px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            margin: auto;
+
+            box-shadow:
+                0 20px 50px
+                rgba(0,0,0,0.2);
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .food-circle-inner {
+
+            width: 340px;
+            height: 340px;
+
+            border-radius: 50%;
+
+            background-image:
+                url("https://www.shopitnepal.com/files/uploads/image/43608859-f27f-4e06-b07d-c11075a9768b-s231regen.png");
+
+            background-size: cover;
+
+            background-position: center;
+
+            background-repeat: no-repeat;
+
+            border: 10px solid #fff8f0;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,0.18);
+        }
+
+
+        /* =========================
+           STATS
+        ========================== */
+
+        .stats {
+            margin-top: -45px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px 15px;
+            text-align: center;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,0.08);
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--orange);
+        }
+
+        .stat-text {
+            color: #777;
+            margin-top: 5px;
+        }
+
+
+        /* =========================
+           SECTION
+        ========================== */
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 45px;
+        }
+
+
+        /* =========================
+           CATEGORIES
+        ========================== */
+
+        .category-card {
+            background: white;
+            border-radius: 20px;
+            padding: 28px 15px;
+            text-align: center;
+
+            box-shadow:
+                0 7px 20px
+                rgba(0,0,0,0.07);
+
+            transition: 0.3s;
+
+            height: 100%;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+
+            box-shadow:
+                0 15px 30px
+                rgba(255,107,53,0.18);
+        }
+
+        .category-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .category-card h5 {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .category-card p {
+            color: #888;
+            font-size: 14px;
+            margin: 0;
+        }
+
+
+        /* =========================
+           FEATURES
+        ========================== */
+
+        .feature-card {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 20px;
+            height: 100%;
+
+            border: 1px solid #f0e4d8;
+
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--orange);
+        }
+
+        .feature-icon {
+            width: 65px;
+            height: 65px;
+
+            border-radius: 18px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: #fff0e8;
+
+            font-size: 30px;
+
+            margin-bottom: 20px;
+        }
+
+        .feature-card h4 {
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: #777;
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           OFFER
+        ========================== */
+
+        .offer {
+            background:
+                linear-gradient(
+                    135deg,
+                    #1F2937,
+                    #374151
+                );
+
+            color: white;
+
+            border-radius: 30px;
+
+            padding: 55px;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .offer::after {
+            content: "🎁";
+            position: absolute;
+            font-size: 180px;
+            right: 30px;
+            top: -30px;
+            opacity: 0.12;
+        }
+
+        .offer h2 {
+            font-size: 38px;
+            font-weight: 800;
+        }
+
+        .offer p {
+            color: #ddd;
+            font-size: 17px;
+        }
+
+        .offer-btn {
+            display: inline-block;
+            margin-top: 15px;
+            background: var(--orange);
+            color: white;
+            padding: 13px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .offer-btn:hover {
+            background: var(--orange-dark);
+            color: white;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 45px 0 25px;
+        }
+
+        .footer-brand {
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .footer-brand span {
+            color: var(--gold);
+        }
+
+        .footer-text {
+            color: #bbb;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            margin-top: 30px;
+            padding-top: 20px;
+            text-align: center;
+            color: #aaa;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 991px) {
+
+            .hero {
+                padding: 70px 0;
+            }
+
+            .hero h1 {
+                font-size: 45px;
+            }
+
+            .food-circle {
+                width: 300px;
+                height: 300px;
+                margin-top: 40px;
+            }
+
+            .food-circle-inner {
+                width: 260px;
+                height: 260px;
+            }
+
+        }
+
+
+        @media (max-width: 576px) {
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            .hero-buttons a {
+                margin-bottom: 10px;
+            }
+
+            .section {
+                padding: 55px 0;
+            }
+
+            .offer {
+                padding: 35px 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================== -->
+
+<nav class="navbar">
+
+    <div class="container">
+
+        <div class="d-flex align-items-center">
+
+            <a
+                href="index.html"
+                class="brand">
+
+                🍴 Food<span>ie</span>
+
+            </a>
+
+        </div>
+
+
+        <div class="d-flex align-items-center">
+
+            <a
+                href="index.html"
+                class="nav-link-custom d-none d-md-block">
+
+                Home
+
+            </a>
+
+
+            <a
+                href="foods.html"
+                class="nav-link-custom d-none d-md-block">
+
+                Menu
+
+            </a>
+
+
+            <a
+                href="login.html"
+                class="login-btn">
+
+                Login
+
+            </a>
+
+
+            <a
+                href="register.html"
+                class="register-btn">
+
+                Register
+
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================
+     HERO
+========================== -->
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+
+            <div class="col-lg-7">
+
+                <div class="hero-content">
+
+                    <div class="hero-badge">
+
+                        🔥 Fresh & Delicious Every Day
+
+                    </div>
+
+
+                    <h1>
+
+                        Good food.
+
+                        <br>
+
+                        <span>Good mood.</span>
+
+                        ❤️
+
+                    </h1>
+
+
+                    <p>
+
+                        Discover delicious meals from your
+                        favorite categories and get them
+                        delivered right to your doorstep.
+
+                    </p>
+
+
+                    <div class="hero-buttons">
+
+                        <a
+                            href="foods.html"
+                            class="order-btn">
+
+                            🍽️ Order Food
+
+                        </a>
+
+
+                        <a
+                            href="#categories"
+                            class="explore-btn">
+
+                            Explore Menu ↓
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-5">
+
+                <div class="food-circle">
+
+                    <div
+                        class="food-circle-inner">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     STATS
+========================== -->
+
+<section class="stats">
+
+    <div class="container">
+
+        <div class="row g-3">
+
+
+            <div class="col-6 col-md-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-number">
+                        30+
+                    </div>
+
+                    <div class="stat-text">
+                        Food Items
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-md-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-number">
+                        9
+                    </div>
+
+                    <div class="stat-text">
+                        Categories
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-md-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-number">
+                        ⚡
+                    </div>
+
+                    <div class="stat-text">
+                        Fast Delivery
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-md-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-number">
+                        ⭐ 4.8
+                    </div>
+
+                    <div class="stat-text">
+                        Customer Rating
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     CATEGORIES
+========================== -->
+
+<section
+    class="section"
+    id="categories">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            What are you craving? 😋
+        </h2>
+
+        <p class="section-subtitle">
+            Choose your favorite category and start ordering.
+        </p>
+
+
+        <div class="row g-4">
+
+
+            <div class="col-6 col-md-4 col-lg-3">
+
+                <a
+                    href="foods.html"
+                    style="text-decoration:none;color:inherit;">
+
+                    <div class="category-card">
+
+                        <div class="category-icon">
+                            🍛
+                        </div>
+
+                        <h5>
+                            Biryani
+                        </h5>
+
+                        <p>
+                            Aromatic & flavorful
+                        </p>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <div class="col-6 col-md-4 col-lg-3">
+
+                <a
+                    href="foods.html"
+                    style="text-decoration:none;color:inherit;">
+
+                    <div class="category-card">
+
+                        <div class="category-icon">
+                            🍕
+                        </div>
+
+                        <h5>
+                            Pizza
+                        </h5>
+
+                        <p>
+                            Hot & cheesy
+                        </p>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <div class="col-6 col-md-4 col-lg-3">
+
+                <a
+                    href="foods.html"
+                    style="text-decoration:none;color:inherit;">
+
+                    <div class="category-card">
+
+                        <div class="category-icon">
+                            🍔
+                        </div>
+
+                        <h5>
+                            Burgers
+                        </h5>
+
+                        <p>
+                            Juicy & delicious
+                        </p>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <div class="col-6 col-md-4 col-lg-3">
+
+                <a
+                    href="foods.html"
+                    style="text-decoration:none;color:inherit;">
+
+                    <div class="category-card">
+
+                        <div class="category-icon">
+                            🍜
+                        </div>
+
+                        <h5>
+                            Noodles
+                        </h5>
+
+                        <p>
+                            Hot & tasty
+                        </p>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <div class="col-6 col-md-4 col-lg-3">
+
+                <a
+                    href="foods.html"
+                    style="text-decoration:none;color:inherit;">
+
+                    <div class="category-card">
+
+                        <div class="category-icon">
+                            🍚
+                        </div>
+
+                        <h5>
+                            Rice
+                        </h5>
+
+                        <p>
+                            Fresh & filling
+                        </p>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <div class="col-6 col-md-4 col-lg-3">
+
+                <a
+                    href="foods.html"
+                    style="text-decoration:none;color:inherit;">
+
+                    <div class="category-card">
+
+                        <div class="category-icon">
+                            🍗
+                        </div>
+
+                        <h5>
+                            Starters
+                        </h5>
+
+                        <p>
+                            Perfect to begin
+                        </p>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <div class="col-6 col-md-4 col-lg-3">
+
+                <a
+                    href="foods.html"
+                    style="text-decoration:none;color:inherit;">
+
+                    <div class="category-card">
+
+                        <div class="category-icon">
+                            🍰
+                        </div>
+
+                        <h5>
+                            Desserts
+                        </h5>
+
+                        <p>
+                            Sweet happiness
+                        </p>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <div class="col-6 col-md-4 col-lg-3">
+
+                <a
+                    href="foods.html"
+                    style="text-decoration:none;color:inherit;">
+
+                    <div class="category-card">
+
+                        <div class="category-icon">
+                            🥤
+                        </div>
+
+                        <h5>
+                            Drinks
+                        </h5>
+
+                        <p>
+                            Refresh yourself
+                        </p>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     WHY FOODIE
+========================== -->
+
+<section class="section">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            Why choose Foodie? ❤️
+        </h2>
+
+        <p class="section-subtitle">
+            Everything you need for a delicious experience.
+        </p>
+
+
+        <div class="row g-4">
+
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🚀
+                    </div>
+
+                    <h4>
+                        Fast Delivery
+                    </h4>
+
+                    <p>
+                        Get your favorite meals delivered
+                        quickly and conveniently to your
+                        doorstep.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🍽️
+                    </div>
+
+                    <h4>
+                        Delicious Food
+                    </h4>
+
+                    <p>
+                        Choose from a variety of tasty
+                        dishes, from biryani and pizza
+                        to desserts and drinks.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🔒
+                    </div>
+
+                    <h4>
+                        Secure Payment
+                    </h4>
+
+                    <p>
+                        Enjoy a simple and secure checkout
+                        experience with multiple payment
+                        options.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     SPECIAL OFFER
+========================== -->
+
+<section class="section pt-0">
+
+    <div class="container">
+
+        <div class="offer">
+
+            <div class="row align-items-center">
+
+                <div class="col-md-8">
+
+                    <h2>
+                        Hungry already? 🍴
+                    </h2>
+
+                    <p>
+                        Explore our menu and discover
+                        something delicious today.
+                    </p>
+
+                    <a
+                        href="foods.html"
+                        class="offer-btn">
+
+                        Start Ordering →
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="row">
+
+
+            <div class="col-md-6">
+
+                <div class="footer-brand">
+
+                    🍴 Food<span>ie</span>
+
+                </div>
+
+                <p class="footer-text">
+
+                    Delicious food, easy ordering,
+                    and a better food experience.
+
+                </p>
+
+            </div>
+
+
+            <div class="col-md-6 text-md-end">
+
+                <p class="footer-text">
+
+                    Fresh food • Easy ordering • Happy customers
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            © 2026 Foodie. All rights reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

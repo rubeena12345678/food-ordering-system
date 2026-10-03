@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Foodie - Order Food</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f8faf9;
+            font-family: Arial, sans-serif;
+            color: #292929;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================== */
+
+        .navbar {
+            background: #1f2937;
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            font-size: 27px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .navbar-brand span {
+            color: #20c997;
+        }
+
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            background:
+                linear-gradient(
+                    135deg,
+                    #087f5b,
+                    #20c997,
+                    #38d9a9
+                );
+
+            color: white;
+            padding: 55px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 44px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 25px;
+        }
+
+
+        /* =========================
+           SEARCH
+        ========================== */
+
+        .search-box {
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .search-box input {
+            height: 55px;
+            border-radius: 30px;
+            padding-left: 25px;
+            border: none;
+            font-size: 17px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0, 0, 0, 0.15);
+        }
+
+        .search-box input:focus {
+            box-shadow:
+                0 0 0 4px
+                rgba(255, 255, 255, 0.3);
+        }
+
+
+        /* =========================
+           CATEGORIES
+        ========================== */
+
+        .category-section {
+            padding: 35px 0 20px;
+        }
+
+        .category-section h3 {
+            font-weight: 800;
+        }
+
+        .category-btn {
+            border: none;
+            background: white;
+
+            padding: 11px 21px;
+            margin: 5px;
+
+            border-radius: 25px;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0, 0, 0, 0.08);
+
+            cursor: pointer;
+
+            font-weight: 600;
+
+            transition: 0.25s;
+        }
+
+        .category-btn:hover {
+            transform: translateY(-2px);
+            background: #e8f7f3;
+        }
+
+        .category-btn.active {
+            background: #198754;
+            color: white;
+        }
+
+
+        /* =========================
+           MESSAGE
+        ========================== */
+
+        #message {
+            margin-top: 10px;
+        }
+
+
+        /* =========================
+           FOOD CARD
+        ========================== */
+
+        .food-card {
+            background: white;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 7px 25px
+                rgba(0, 0, 0, 0.08);
+
+            height: 100%;
+
+            transition: 0.3s;
+        }
+
+        .food-card:hover {
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 15px 35px
+                rgba(25, 135, 84, 0.18);
+        }
+
+        .food-image {
+            width: 100%;
+            height: 210px;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+        .food-content {
+            padding: 20px;
+        }
+
+        .food-name {
+            font-size: 21px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .food-category {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .food-price {
+            color: #198754;
+
+            font-size: 21px;
+
+            font-weight: 800;
+        }
+
+
+        /* =========================
+           ACTION ROW
+        ========================== */
+
+        .action-row {
+            display: flex !important;
+
+            flex-direction: row !important;
+
+            align-items: center !important;
+
+            gap: 10px !important;
+
+            width: 100%;
+        }
+
+        .cart-action {
+            flex: 1;
+
+            min-width: 0;
+        }
+
+
+        /* =========================
+           ADD TO CART
+        ========================== */
+
+        .add-cart-btn {
+            width: 100%;
+
+            height: 46px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background: #198754;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+        .add-cart-btn:hover {
+            background: #157347;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================
+           QUANTITY CONTROL
+        ========================== */
+
+        .quantity-control {
+
+            width: 100%;
+
+            height: 46px;
+
+            display: flex !important;
+
+            flex-direction: row !important;
+
+            align-items: center !important;
+
+            justify-content: space-between;
+
+            background: #e8f7f3;
+
+            border: 2px solid #198754;
+
+            border-radius: 11px;
+
+            overflow: hidden;
+        }
+
+
+        .quantity-btn {
+
+            width: 45px !important;
+
+            min-width: 45px !important;
+
+            height: 42px !important;
+
+            padding: 0 !important;
+
+            margin: 0 !important;
+
+            border: none !important;
+
+            background: #198754;
+
+            color: white;
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            display: flex !important;
+
+            flex-direction: row !important;
+
+            align-items: center !important;
+
+            justify-content: center !important;
+
+            transition: 0.2s;
+        }
+
+
+        .quantity-btn:hover {
+            background: #157347;
+        }
+
+
+        .quantity-number {
+
+            flex: 1;
+
+            text-align: center;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            color: #1f2937;
+        }
+
+
+        /* =========================
+           ORDER NOW
+        ========================== */
+
+        .order-now-btn {
+
+            flex: 1;
+
+            height: 46px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff6b35,
+                    #ff8c42
+                );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+        .order-now-btn:hover {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e85d04,
+                    #f97316
+                );
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================
+           NO FOOD
+        ========================== */
+
+        .no-food {
+
+            text-align: center;
+
+            padding: 70px 20px;
+
+            color: #777;
+
+            font-size: 21px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 576px) {
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .action-row {
+
+                flex-direction: column !important;
+
+            }
+
+            .cart-action,
+            .order-now-btn {
+
+                width: 100%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================== -->
+
+<nav class="navbar navbar-dark">
+
+    <div class="container">
+
+        <a
+            class="navbar-brand"
+            href="index.html">
+
+            🍴 Food<span>ie</span>
+
+        </a>
+
+
+        <div>
+
+            <a
+                href="index.html"
+                class="btn btn-outline-light me-2">
+
+                🏠 Home
+
+            </a>
+
+
+            <a
+                href="cart.html"
+                class="btn btn-success">
+
+                🛒 Cart
+
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================
+     HERO
+========================== -->
+
+<section class="hero">
+
+    <div class="container">
+
+        <h1>
+            Delicious food, delivered to you 🍽️
+        </h1>
+
+        <p>
+            Discover your favorite meals and order them easily.
+        </p>
+
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchInput"
+                class="form-control"
+                placeholder="🔍 Search for food...">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     CATEGORIES
+========================== -->
+
+<section class="category-section">
+
+    <div class="container text-center">
+
+        <h3 class="mb-3">
+            Explore Categories
+        </h3>
+
+
+        <button
+            class="category-btn active"
+            onclick="filterCategory('All', this)">
+
+            All
+
+        </button>
+
+
+        <button
+            class="category-btn"
+            onclick="filterCategory('Biryani', this)">
+
+            🍛 Biryani
+
+        </button>
+
+
+        <button
+            class="category-btn"
+            onclick="filterCategory('Pizza', this)">
+
+            🍕 Pizza
+
+        </button>
+
+
+        <button
+            class="category-btn"
+            onclick="filterCategory('Burger', this)">
+
+            🍔 Burger
+
+        </button>
+
+
+        <button
+            class="category-btn"
+            onclick="filterCategory('Noodles', this)">
+
+            🍜 Noodles
+
+        </button>
+
+
+        <button
+            class="category-btn"
+            onclick="filterCategory('Rice', this)">
+
+            🍚 Rice
+
+        </button>
+
+
+        <button
+            class="category-btn"
+            onclick="filterCategory('Starters', this)">
+
+            🍗 Starters
+
+        </button>
+
+
+        <button
+            class="category-btn"
+            onclick="filterCategory('Snacks', this)">
+
+            🍟 Snacks
+
+        </button>
+
+
+        <button
+            class="category-btn"
+            onclick="filterCategory('Desserts', this)">
+
+            🍰 Desserts
+
+        </button>
+
+
+        <button
+            class="category-btn"
+            onclick="filterCategory('Drinks', this)">
+
+            🥤 Drinks
+
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     FOOD CONTAINER
+========================== -->
+
+<div class="container py-4">
+
+    <div id="message"></div>
+
+    <div
+        id="foodContainer"
+        class="row g-4">
+
+    </div>
+
+</div>
+
+
+<script src="js/foods.js"></script>
+
+</body>
+
+</html>
